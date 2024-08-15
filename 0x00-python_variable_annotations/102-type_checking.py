@@ -7,10 +7,10 @@ def zoom_array(
     lst: Union[List[int], Tuple[int, ...]], factor: int = 2
 ) -> List[int]:
     """ Zoom array- returning tuple of an array """
-    zoomed_in: List[int] = (
+    zoomed_in: List[int] = [
         item for item in lst
         for i in range(factor)
-    )
+    ]
     return zoomed_in
 
 

@@ -6,9 +6,9 @@ T = TypeVar('T')
 
 
 def safely_get_value(
-    dct: Mapping[Any, T], key: Any, default: Union[T, None] = None
+    dct: Mapping, key: Any, default: Union[T, None] = None
 ) -> Union[Any, T]:
-""" TypeVar function usage """
+    """ TypeVar function usage """
     if key in dct:
         return dct[key]
     else:

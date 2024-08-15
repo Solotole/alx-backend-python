@@ -1,9 +1,10 @@
+#!/usr/bin/env python3
 from typing import List, Sequence, Tuple
 
 
 def zoom_array(lst: Tuple, factor: int = 2) -> List:
     """ Zoom array- returning tuple of an array """
-    zoomed_in: List[int] = [
+    zoomed_in: List = [
         item for item in lst
         for i in range(factor)
     ]

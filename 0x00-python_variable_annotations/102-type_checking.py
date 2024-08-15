@@ -5,9 +5,9 @@ from typing import List, Sequence, Tuple, Union
 
 def zoom_array(
     lst: Union[List[int], Tuple[int, ...]], factor: int = 2
-) -> Tuple:
+) -> Tuple[int]:
     """ Zoom array- returning tuple of an array """
-    zoomed_in: Tuple = (
+    zoomed_in: Tuple[int] = (
         item for item in lst
         for i in range(factor)
     )

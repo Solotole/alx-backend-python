@@ -1,7 +1,7 @@
-from typing import List, Sequence
+from typing import List, Sequence, Tuple
 
 
-def zoom_array(lst: Sequence[int], factor: int = 2) -> List[int]:
+def zoom_array(lst: Tuple, factor: int = 2) -> List:
     """ Zoom array- returning tuple of an array """
     zoomed_in: List[int] = [
         item for item in lst

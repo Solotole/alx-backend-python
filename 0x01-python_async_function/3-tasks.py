@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """ Creating a task in the loop """
-from typing import Any, Awaitable
 import asyncio
+from typing import Any, Awaitable
 wait_random = __import__('0-basic_async_syntax').wait_random
 
 

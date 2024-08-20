@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """ Basic async generator """
 import asyncio
-from typing import AsyncGenerator
 import random
+from typing import AsyncGenerator
 
 
 async def async_generator() -> AsyncGenerator[float, None]:

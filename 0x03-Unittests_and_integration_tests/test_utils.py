@@ -3,7 +3,7 @@
 import unittest
 from parameterized import parameterized
 from utils import access_nested_map, get_json
-from unittest import Mock, patch
+from unittest.mock import Mock, patch
 
 
 class TestAccessNestedMap(unittest.TestCase):
@@ -27,7 +27,8 @@ class TestAccessNestedMap(unittest.TestCase):
         """
         with self.assertRaises(KeyError):
             access_nested_map(nested_map, path)
-    
+
+
 class TestGetJson(unittest.TestCase):
     """Class to test get_json function"""
     @parameterized.expand([

@@ -25,7 +25,7 @@ class TestAccessNestedMap(unittest.TestCase):
         is raised for the following inputs
         """
         with self.assertRaises(KeyError):
-            access_nested_map(nested_map, path), expected)
+            access_nested_map(nested_map, path)
 
 
 if __name__ == "__main__":

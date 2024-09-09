@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Unit tests for GithubOrgClient"""
 import unittest
-from unittest.mock import patch, Mock
+from unittest.mock import patch, MagicMock
 from parameterized import parameterized
 from client import GithubOrgClient
 
@@ -13,7 +13,12 @@ class TestGithubOrgClient(unittest.TestCase):
         ("abc", "https://api.github.com/orgs/abc"),
     ])
     @patch('client.get_json')
-    def test_org(self, org_name, expected_url, mock_get_json):
+    def test_org(
+        self,
+        org_name: str,
+        expected_url: str,
+        mock_get_json: MagicMock
+    ) -> None:
         """Test that GithubOrgClient.org returns the correct value"""
         client = GithubOrgClient(org_name)
         mock_response = {

@@ -5,6 +5,7 @@ from unittest.mock import patch, Mock
 from parameterized import parameterized
 from client import GithubOrgClient
 
+
 class TestGithubOrgClient(unittest.TestCase):
     """Test class for GithubOrgClient"""
     @parameterized.expand([
@@ -15,7 +16,9 @@ class TestGithubOrgClient(unittest.TestCase):
     def test_org(self, org_name, expected_url, mock_get_json):
         """Test that GithubOrgClient.org returns the correct value"""
         client = GithubOrgClient(org_name)
-        mock_response = {"repos_url": "https://api.github.com/orgs/{org}/repos"}
+        mock_response = {
+            "repos_url": "https://api.github.com/orgs/{org}/repos"
+        }
         mock_get_json.return_value = mock_response
         result = client.org
         mock_get_json.assert_called_once_with(expected_url)

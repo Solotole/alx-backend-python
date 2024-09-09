@@ -50,14 +50,15 @@ class TestMemoize(unittest.TestCase):
     """Parameterize and patch"""
     def test_memoize(self):
         """Test that a_property is memoized and a_method is only called once"""
-
         class TestClass:
             """Class to test memoization"""
             def a_method(self):
+                """first method"""
                 return 42
 
             @memoize
             def a_property(self):
+                """second method"""
                 return self.a_method()
         test_instance = TestClass()
         with patch.object(TestClass, 'a_method', return_value=42) as mock_method:

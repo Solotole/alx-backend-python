@@ -4,7 +4,9 @@ import unittest
 from unittest.mock import patch, MagicMock
 from parameterized import parameterized
 from client import GithubOrgClient
-
+import requests
+from fixtures import org_payload, repos_payload, expected_repos, apache2_repos
+from typing import Dict, None
 
 class TestGithubOrgClient(unittest.TestCase):
     """Test class for GithubOrgClient"""
@@ -75,6 +77,52 @@ class TestGithubOrgClient(unittest.TestCase):
         """
         result = GithubOrgClient.has_license(repo, license_key)
         self.assertEqual(result, expected)
+
+
+@parameterized_class(
+    ("org_payload", "repos_payload", "expected_repos", "apache2_repos"),
+    [(org_payload, repos_payload, expected_repos, apache2_repos)]
+)
+class TestIntegrationGithubOrgClient(unittest.TestCase):
+    """Integration test class for GithubOrgClient"""
+
+    @classmethod
+    def setUpClass(cls) -> None:
+        """Set up the test environment"""
+        cls.get_patcher = patch("requests.get")
+        cls.mock_get = cls.get_patcher.start()
+
+        # Set up side effects for different URLs
+        cls.mock_get.side_effect = lambda url: MagicMock(
+            json=lambda: cls._get_fixture(url)
+        )
+
+    @classmethod
+    def tearDownClass(cls) -> None:
+        """Clean up the test environment"""
+        cls.get_patcher.stop()
+
+    @staticmethod
+    def _get_fixture(url: str) -> Dict:
+        """Return the appropriate fixture based on the URL"""
+        if url == "https://api.github.com/orgs/test_org":
+            return org_payload
+        elif url == "https://api.github.com/orgs/test_org/repos":
+            return repos_payload
+        else:
+            raise ValueError(f"Unexpected URL: {url}")
+
+    def test_public_repos(self) -> None:
+        """Test the public_repos method with integration testing"""
+        client = GithubOrgClient("test_org")
+        result = client.public_repos()
+        self.assertEqual(result, self.expected_repos)
+
+    def test_public_repos_with_license(self) -> None:
+        """Test the public_repos method with license filtering"""
+        client = GithubOrgClient("test_org")
+        result = client.public_repos(license="Apache")
+        self.assertEqual(result, self.apache2_repos)
 
 
 if __name__ == "__main__":

@@ -24,7 +24,9 @@ class TestAccessNestedMap(unittest.TestCase):
         """assertRaises context manager to test that a KeyError
         is raised for the following inputs
         """
-        self.assertRaises(access_nested_map(nested_map, path), expected)
+        with self.assertRaises(KeyError):
+            access_nested_map(nested_map, path), expected)
+
 
 if __name__ == "__main__":
     unittest.main()
